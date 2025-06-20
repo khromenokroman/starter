@@ -89,6 +89,35 @@ sudo dpkg -i libstarter0*.deb
 
 - `libstarter0-dev` - содержит статическую библиотеку и заголовочные файлы
 
+### Пример использования
+``` cpp
+#include <iostream>
+#include <starter/starter.hpp>
+
+int main() {
+    try {
+        // Создание объекта для управления службой
+        auto starter = tools::dbus::IStarter::create("nginx.service");
+        
+        // Остановка службы
+        std::cout << "Останавливаем службу nginx..." << std::endl;
+        starter->stop().poll();
+        std::cout << "Служба nginx остановлена" << std::endl;
+        
+        // Запуск службы
+        std::cout << "Запускаем службу nginx..." << std::endl;
+        starter->start().poll();
+        std::cout << "Служба nginx запущена" << std::endl;
+        
+    } catch (const std::exception& e) {
+        std::cerr << "Ошибка: " << e.what() << std::endl;
+        return 1;
+    }
+    
+    return 0;
+}
+```
+
 ### Ограничения
 - Для корректной работы библиотеки требуется доступ к системной шине D-Bus
 - В контейнерных средах (Docker, LXC) могут потребоваться дополнительные настройки для доступа к D-Bus

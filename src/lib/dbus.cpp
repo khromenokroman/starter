@@ -38,7 +38,7 @@ namespace tools::dbus {
 
         m_condition_variable.notify_one();
     }
-    Starter &Starter::start() {
+    IStarter &Starter::start() {
         ::sdbus::ObjectPath path;
         ::sdbus::createProxy(service_name, object_path)
                 ->callMethod("StartUnit")
@@ -48,7 +48,7 @@ namespace tools::dbus {
         job_path = path;
         return *this;
     }
-    Starter &Starter::stop() {
+    IStarter &Starter::stop() {
         ::sdbus::ObjectPath path;
         ::sdbus::createProxy(service_name, object_path)
                 ->callMethod("StopUnit")

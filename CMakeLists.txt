@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_SHARED_LIBS "Собирать динамическую библиотеку вместо статической" ON)
-option(BUILD_EXAMPLE "Собирать приложение (пример)" OFF)
+option(BUILD_EXAMPLE "Собирать приложение (пример)" ON)
 
 include(GNUInstallDirs)
 set(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_FULL_INCLUDEDIR} CACHE PATH "Path for headers installation")
@@ -48,6 +48,7 @@ set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${P
 if (BUILD_SHARED_LIBS)
     # Настройки для динамической библиотеки
     set(CPACK_DEBIAN_LIB_PACKAGE_NAME "lib${PROJECT_NAME}${PROJECT_VERSION_MAJOR}")
+    set(CPACK_DEBIAN_LIB__PACKAGE_DEPENDS "libsdbus-c++2")
     set(CPACK_DEBIAN_LIB_DESCRIPTION "Starter")
     set(CPACK_DEBIAN_LIB_MAINTAINER "roma55592@yandex.ru")
     set(CPACK_DEBIAN_LIB_PACKAGE_SHLIBDEPS ON)

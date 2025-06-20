@@ -35,6 +35,8 @@ target_include_directories(${LIB_NAME} PRIVATE ${INCLUDE_DIR})
 
 add_library(${LIB_NAME}::${LIB_NAME} ALIAS ${LIB_NAME})
 
+target_link_libraries(${LIB_NAME} PRIVATE sdbus-c++)
+
 install(DIRECTORY ${INCLUDE_DIR}/
         COMPONENT dev
         DESTINATION include
